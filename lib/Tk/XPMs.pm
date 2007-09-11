@@ -4,12 +4,13 @@ use vars qw(@EXPORT_OK $VERSION);
 use warnings;
 use strict;
 
-our $VERSION = "1.07";
+our $VERSION = "1.09";
 
 use Exporter;
 our @ISA=qw(Exporter);
 
 my @xpm_list = qw(
+  tools_1_xpm
   tools_xpm
   exit_xpm
   stop_xpm
@@ -41,19 +42,29 @@ my @xpm_list = qw(
   cut_disabled_xpm cut_normal_xpm
   paste_disabled_xpm paste_normal_xpm
   cross_xpm
+  money_xpm
   mail_xpm
   search_xpm
   thumbs_xpm
+  dias_xpm
   info_xpm
   rotate_left_xpm
   rotate_right_xpm
   eye_xpm
   noeye_xpm
   lock_xpm
+  filter_xpm
+  filter_switch_xpm
 );
 our %EXPORT_TAGS = ( 
   'all' => [ @xpm_list,
               "list_xpms"
+           ] ,
+  'search' => [ qw(
+                   filter_xpm
+                   filter_switch_xpm
+                   search_xpm
+                 )
            ] ,
   'arrows' => [ qw(
                    arrow_up_xpm
@@ -74,10 +85,10 @@ our %EXPORT_TAGS = (
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
-sub list_xpms # used for test script ...
+sub list_xpms # used for test script ... {{{
 {
   return @xpm_list;
-}
+} # }}}
 
 # POD {{{1
 
@@ -109,9 +120,52 @@ The following image methods are defined:
 
 =cut
 
-#
+# }}}
 
-sub tools_xpm {
+sub tools_1_xpm { # {{{
+
+=head2 tools_1_xpm()
+
+Returns a tool box icon.
+
+=cut
+
+  return <<'EOT';
+/* XPM */
+static char * tools_1_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"21 20 5 1",
+/* colors */
+" 	c none",
+".	c black",
+"X	c #f0ff80",
+"W	c #f0dd70",
+"g	c #444444",
+/* pixels */
+"               .     ",
+"             ..     .",
+"           ...     ..",
+"          ...     ...",
+"          ...    ... ",
+"           ........  ",
+"            .....    ",
+"           ...g      ",
+"          ...g       ",
+"          ..g        ",
+"        ...g         ",
+"       ...g          ",
+"      ...g           ",
+"    ....g            ",
+" ........            ",
+"...    ...           ",
+"..     ...           ",
+"..    ...            ",
+".    ..              ",
+"    .                "};
+EOT
+} # tools_1_xpm }}}
+
+sub tools_xpm { # {{{
 
 =head2 tools_xpm()
 
@@ -121,7 +175,7 @@ Returns a tool box icon.
 
   return <<'EOT';
 /* XPM */
-static char * folder_xpm[] = {
+static char * tools_xpm[] = {
 /* width height num_colors chars_per_pixel */
 "21 20 5 1",
 /* colors */
@@ -152,9 +206,9 @@ static char * folder_xpm[] = {
 ".    ..        WWWWWW",
 "    .           WWWW "};
 EOT
-} # tools_xpm
+} # tools_xpm }}}
 
-sub Tk_xpm {
+sub Tk_xpm { # {{{
 
 =head2 Tk_xpm()
 
@@ -205,9 +259,9 @@ static char *Tk[] = {
 "################################"
 };
 EOT
-} # Tk_xpm
+} # Tk_xpm }}}
 
-sub diskette_xpm {
+sub diskette_xpm { # {{{
 
 =head2 diskette_xpm()
 
@@ -217,7 +271,7 @@ Returns a 14 x 15 floppy disc symbol.
 
   return <<'EOT';
 /* XPM */
-static char *winfolder[] = {
+static char *diskette[] = {
 /* width height num_colors chars_per_pixel */
 "    14    15       17            1",
 /* colors */
@@ -256,9 +310,9 @@ static char *winfolder[] = {
 " #############",
 };
 EOT
-} # diskette_xpm
+} # diskette_xpm }}}
 
-sub diskette2_xpm {
+sub diskette2_xpm { # {{{
 
 =head2 diskette2_xpm()
 
@@ -268,7 +322,7 @@ Returns another 14 x 15 floppy disc symbol.
 
   return <<'EOT';
 /* XPM */
-static char *winfolder[] = {
+static char *diskette2[] = {
 /* width height num_colors chars_per_pixel */
 "    14    15       17            1",
 /* colors */
@@ -307,9 +361,9 @@ static char *winfolder[] = {
 " #############",
 };
 EOT
-} # diskette2_xpm
+} # diskette2_xpm }}}
 
-sub folder_xpm {
+sub folder_xpm { # {{{
 
 =head2 folder_xpm()
 
@@ -342,9 +396,9 @@ static char * folder_xpm[] = {
 "gXXXvvvvvvvv.   ",
 ".............   "};
 EOT
-} # folder_xpm
+} # folder_xpm }}}
 
-sub red_folder_xpm {
+sub red_folder_xpm { # {{{
 
 =head2 red_folder_xpm()
 
@@ -393,9 +447,9 @@ static char *red_folder[] = {
 "                 ",
 };
 EOT
-} # folder_xpm
+} # folder_xpm }}}
 
-sub openfolder_xpm {
+sub openfolder_xpm { # {{{
 
 =head2 openfolder_xpm()
 
@@ -430,9 +484,9 @@ static char * openfolder_xpm[] = {
 "                 ",
 };
 EOT
-} # openfolder_xpm
+} # openfolder_xpm }}}
 
-sub textfile_xpm {
+sub textfile_xpm { # {{{
 
 =head2 textfile_xpm()
 
@@ -460,9 +514,9 @@ static char * textfile_xpm[] = {
 " .XXXXXXXX. ",
 " .......... "};
 EOT
-} # textfile_xpm
+} # textfile_xpm }}}
 
-sub srcfile_xpm {
+sub srcfile_xpm { # {{{
 
 =head2 srcfile_xpm()
 
@@ -490,9 +544,9 @@ static char * srcfile_xpm[] = {
 " .XXXXXXXX. ",
 " .......... "};
 EOT
-} # srcfile_xpm
+} # srcfile_xpm }}}
 
-sub file_xpm {
+sub file_xpm { # {{{
 
 =head2 file_xpm()
 
@@ -520,9 +574,9 @@ static char * file_xpm[] = {
 " .XXXXXXXX. ",
 " .......... "};
 EOT
-} # file_xpm
+} # file_xpm }}}
 
-sub winfolder_xpm {
+sub winfolder_xpm { # {{{
 
 =head2 winfolder_xpm()
 
@@ -571,9 +625,9 @@ static char *winfolder[] = {
 "                 ",
 };
 EOT
-} # winfolder_xpm
+} # winfolder_xpm }}}
 
-sub winact_folder_xpm {
+sub winact_folder_xpm { # {{{
 
 =head2 winact_folder_xpm()
 
@@ -583,7 +637,7 @@ Returns a symbol for a windows open folder.
 
   return <<'EOT';
 /* XPM */
-static char *winfolder[] = {
+static char *winact_folder[] = {
 /* width height num_colors chars_per_pixel */
 "    17    15       17            1",
 /* colors */
@@ -622,9 +676,9 @@ static char *winfolder[] = {
 "                 ",
 };
 EOT
-} # winact_folder_xpm
+} # winact_folder_xpm }}}
 
-sub act_folder_xpm {
+sub act_folder_xpm { # {{{
 
 =head2 act_folder_xpm()
 
@@ -656,9 +710,9 @@ static char * act_folder_xpm[] = {
 "..XXXXXXXXXX..  ",
 ".............   "};
 EOT
-} # act_folder_xpm
+} # act_folder_xpm }}}
 
-sub wintext_xpm {
+sub wintext_xpm { # {{{
 
 =head2 wintext_xpm()
 
@@ -710,9 +764,9 @@ static char *wintext[] = {
 "               "
 };
 EOT
-} # wintext_xpm
+} # wintext_xpm }}}
 
-sub ColorEditor_xpm {
+sub ColorEditor_xpm { # {{{
 
 =head2 ColorEditor_xpm()
 
@@ -780,9 +834,9 @@ static char * ColorEditor_xpm[] = {
 "++++++++++++++++++++++ +++ O OOOOOOOOO          "};
 
 EOT
-} # ColorEditor_xpm
+} # ColorEditor_xpm }}}
 
-sub Camel_xpm {
+sub Camel_xpm { # {{{
 
 =head2 Camel_xpm()
 
@@ -833,9 +887,9 @@ static char *Camel[] = {
 "................................",
 };
 EOT
-} # Camel_xpm
+} # Camel_xpm }}}
 
-sub arrow_up_xpm {
+sub arrow_up_xpm { # {{{
 
 =head2 arrow_up_xpm()
 
@@ -863,9 +917,9 @@ static char * arrow_up_xpm[] = {
 "        ....        ",
 "                    "};
 EOT
-} # arrow_up_xpm
+} # arrow_up_xpm }}}
 
-sub arrow_down_xpm {
+sub arrow_down_xpm { # {{{
 
 =head2 arrow_down_xpm()
 
@@ -893,9 +947,9 @@ static char * arrow_down_xpm[] = {
 "         ..         ",
 "                    "};
 EOT
-} # arrow_down_xpm
+} # arrow_down_xpm }}}
 
-sub arrow_left_blue_xpm {
+sub arrow_left_blue_xpm { # {{{
 
 =head2 arrow_left_blue_xpm()
 
@@ -933,9 +987,9 @@ static char *arrow_left_blue[] = {
 "...................."
 };
 EOT
-} # arrow_left_blue_xpm
+} # arrow_left_blue_xpm }}}
 
-sub arrow_right_blue_xpm {
+sub arrow_right_blue_xpm { # {{{
 
 =head2 arrow_right_blue_xpm()
 
@@ -973,9 +1027,9 @@ static char *arrow_right_blue[] = {
 "...................."
 };
 EOT
-} # arrow_right_blue_xpm
+} # arrow_right_blue_xpm }}}
 
-sub arrow_first_xpm {
+sub arrow_first_xpm { # {{{
 
 =head2 arrow_first_xpm()
 
@@ -1003,9 +1057,9 @@ static char * arrow_first_xpm[] = {
 "      .X     .      ",
 "                    "};
 EOT
-} # arrow_first_xpm
+} # arrow_first_xpm }}}
 
-sub arrow_prev_xpm {
+sub arrow_prev_xpm { # {{{
 
 =head2 arrow_prev_xpm()
 
@@ -1033,9 +1087,9 @@ static char * arrow_prev_xpm[] = {
 "            .       ",
 "                    "};
 EOT
-} # arrow_prev_xpm
+} # arrow_prev_xpm }}}
 
-sub arrow_ppage_xpm {
+sub arrow_ppage_xpm { # {{{
 
 =head2 arrow_ppage_xpm()
 
@@ -1063,9 +1117,9 @@ static char * arrow_ppage_xpm[] = {
 "         .     .    ",
 "                    "};
 EOT
-} # arrow_ppage_xpm
+} # arrow_ppage_xpm }}}
 
-sub arrow_next_xpm {
+sub arrow_next_xpm { # {{{
 
 =head2 arrow_next_xpm()
 
@@ -1093,9 +1147,9 @@ static char * arrow_next_xpm[] = {
 "       .            ",
 "                    "};
 EOT
-} # arrow_next_xpm
+} # arrow_next_xpm }}}
 
-sub arrow_npage_xpm {
+sub arrow_npage_xpm { # {{{
 
 =head2 arrow_npage_xpm()
 
@@ -1123,9 +1177,9 @@ static char * arrow_npage_xpm[] = {
 "    .     .         ",
 "                    "};
 EOT
-} # arrow_npage_xpm
+} # arrow_npage_xpm }}}
 
-sub arrow_last_xpm {
+sub arrow_last_xpm { # {{{
 
 =head2 arrow_last_xpm()
 
@@ -1153,9 +1207,9 @@ static char * arrow_last_xpm[] = {
 "      .     X.      ",
 "                    "};
 EOT
-} # arrow_last_xpm
+} # arrow_last_xpm }}}
 
-sub mail_xpm {
+sub mail_xpm { # {{{
 
 =head2 mail_xpm()
 
@@ -1314,9 +1368,9 @@ static char *mail[] = {
 "l.l.l.l.l.l.l.l.l.l.l.l.l.l.l.l.l.l.l.l."
 };
 EOT
-} # mail_xpm
+} # mail_xpm }}}
 
-sub cross_xpm {
+sub cross_xpm { # {{{
 
 =head2 cross_xpm()
 
@@ -1326,7 +1380,7 @@ Returns a symbol for a  red x-shaped cross.
 
   return <<'EOT';
 /* XPM */
-static char *corss[] = {
+static char *cross[] = {
 /* columns rows colors chars-per-pixel */
 "16 20 4 1",
 "  c black",
@@ -1356,9 +1410,9 @@ static char *corss[] = {
 "oooooooooooooooo"
 };
 EOT
-} # cross_xpm
+} # cross_xpm }}}
 
-sub info_xpm {
+sub info_xpm { # {{{
 
 =head2 info_xpm()
 
@@ -1397,9 +1451,9 @@ static char *info[] = {
 "XXXXXXXXXXXXXXXXXXXXXXXX"
 };
 EOT
-} # info_xpm
+} # info_xpm }}}
 
-sub zoom_in_xpm {
+sub zoom_in_xpm { # {{{
 
 =head2 arrow_zomm_in_xpm()
 
@@ -1439,9 +1493,9 @@ static char *zoom_in[] = {
 "oooooooooooooooooooo"
 };
 EOT
-} # arrow_zoom_in_xpm
+} # arrow_zoom_in_xpm }}}
 
-sub zoom_out_xpm {
+sub zoom_out_xpm { # {{{
 
 =head2 arrow_zomm_out_xpm()
 
@@ -1481,9 +1535,9 @@ static char *zoom_out[] = {
 "oooooooooooooooooooo"
 };
 EOT
-} # arrow_zoom_out_xpm
+} # arrow_zoom_out_xpm }}}
 
-sub cut_disabled_xpm {
+sub cut_disabled_xpm { # {{{
 
 =head2 cut_disabled_xpm()
 
@@ -1493,7 +1547,7 @@ Returns a symbol for a cut symbol (disabled).
 
   return <<'EOT';
 /* XPM */
-static char *cut_incactive[] = {
+static char *cut_disabled[] = {
 /* columns rows colors chars-per-pixel */
 "20 20 3 1",
 ".	s None	c None",
@@ -1522,9 +1576,9 @@ static char *cut_incactive[] = {
 "...................."
 };
 EOT
-} # cut_disabled_xpm
+} # cut_disabled_xpm }}}
 
-sub cut_normal_xpm {
+sub cut_normal_xpm { # {{{
 
 =head2 cut_normal_xpm()
 
@@ -1534,7 +1588,7 @@ Returns a symbol for a cut symbol (normal).
 
   return <<'EOT';
 /* XPM */
-static char *cut_incactive[] = {
+static char *cut_normal[] = {
 /* columns rows colors chars-per-pixel */
 "20 20 3 1",
 ".	s None	c None",
@@ -1563,9 +1617,9 @@ static char *cut_incactive[] = {
 "...................."
 };
 EOT
-} # cut_normal_xpm
+} # cut_normal_xpm }}}
 
-sub paste_disabled_xpm {
+sub paste_disabled_xpm { # {{{
 
 =head2 paste_disabled_xpm()
 
@@ -1575,7 +1629,7 @@ Returns a symbol for a paste symbol (disabled).
 
   return <<'EOT';
 /* XPM */
-static char *paste_inactive[] = {
+static char *paste_disabled[] = {
 /* columns rows colors chars-per-pixel */
 "24 20 3 1",
 ".	s None	c None",
@@ -1604,9 +1658,9 @@ static char *paste_inactive[] = {
 "........................"
 };
 EOT
-} # paste_disabled_xpm
+} # paste_disabled_xpm }}}
 
-sub paste_normal_xpm {
+sub paste_normal_xpm { # {{{
 
 =head2 paste_normal_xpm()
 
@@ -1616,7 +1670,7 @@ Returns a symbol for a paste symbol (normal).
 
   return <<'EOT';
 /* XPM */
-static char *paste_inactive[] = {
+static char *paste_normal[] = {
 /* columns rows colors chars-per-pixel */
 "24 20 3 1",
 ".	s None	c None",
@@ -1645,9 +1699,9 @@ static char *paste_inactive[] = {
 "........................"
 };
 EOT
-} # paste_normal_xpm
+} # paste_normal_xpm }}}
 
-sub search_xpm {
+sub search_xpm { # {{{
 
 =head2 search_xpm()
 
@@ -1793,9 +1847,269 @@ static char *search[] = {
 " . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
 };
 EOT
-} # search_xpm
+} # search_xpm }}}
 
-sub thumbs_xpm {
+sub filter_xpm { # {{{
+
+=head2 filter_xpm()
+
+Returns a symbol for eyeglasses.
+
+=cut
+
+  return <<'EOT';
+/* XPM */
+static char *filter[] = {
+/* columns rows colors chars-per-pixel */
+"20 18 8 1",
+"  c black",
+". c #008484",
+"X c #00ADAD",
+"o c #00C6C6",
+"O c cyan",
+"+ c #21DEDE",
+"@ c #848484",
+"# c None",
+/* pixels */
+"####################",
+"####################",
+"####################",
+"####################",
+"####################",
+"####################",
+"##@ #########  #####",
+"## #@####### ## @###",
+"## # @    #      @##",
+"## ## O++o @ O++o ##",
+"## ## +ooX # +ooX ##",
+"### # +ooX # +ooX ##",
+"##### oXX. # oXX. ##",
+"######    ###    ###",
+"####################",
+"####################",
+"####################",
+"####################"
+};
+EOT
+} # filter_xpm }}}
+
+sub filter_switch_xpm { # {{{
+
+=head2 filter_switch_xpm()
+
+Returns a symbol for crossed out eyeglasses.
+
+=cut
+
+  return <<'EOT';
+/* XPM */
+static char *filter_switch[] = {
+/* columns rows colors chars-per-pixel */
+"25 20 178 2",
+"   c black",
+".  c #010000",
+"X  c #000102",
+"o  c #010204",
+"O  c #060000",
+"+  c #020808",
+"@  c #000D0B",
+"#  c #000C0D",
+"$  c #000D0D",
+"%  c #000D0E",
+"&  c #030D0E",
+"*  c #00100F",
+"=  c #001110",
+"-  c #001212",
+";  c #001213",
+":  c #001514",
+">  c #001615",
+",  c #001617",
+"<  c #001618",
+"1  c #001A19",
+"2  c #001C1A",
+"3  c #130000",
+"4  c #140000",
+"5  c #1F0000",
+"6  c #200000",
+"7  c #220000",
+"8  c #250000",
+"9  c #2F0304",
+"0  c #3A6C6D",
+"q  c #400000",
+"w  c #410000",
+"e  c #440000",
+"r  c #450000",
+"t  c #703C3E",
+"y  c #7C3837",
+"u  c #7C3839",
+"i  c #37AFAE",
+"p  c #3AAEAE",
+"a  c #429090",
+"s  c #659B9B",
+"d  c #649C9B",
+"f  c #778A88",
+"g  c #7A8888",
+"h  c #6DBEBF",
+"j  c #6EBCBC",
+"k  c #75B9BA",
+"l  c #77B9B8",
+"z  c #8F2F30",
+"x  c #803637",
+"c  c #843332",
+"v  c #843435",
+"b  c #883233",
+"n  c #8B3130",
+"m  c #8B3131",
+"M  c #942D2E",
+"N  c #952D2E",
+"B  c #952E2F",
+"V  c #992B2A",
+"C  c #9B2929",
+"Z  c #9B2B2A",
+"A  c #9C2828",
+"S  c #9D2929",
+"D  c #9D292A",
+"F  c #9C2A29",
+"G  c #9C2A2A",
+"H  c #9F2929",
+"J  c #A42627",
+"K  c #A72525",
+"L  c #A62627",
+"P  c #A22729",
+"I  c #A22827",
+"U  c #A02829",
+"Y  c #AA2222",
+"T  c #A92425",
+"R  c #AB2524",
+"E  c #8D4948",
+"W  c #838383",
+"Q  c #868583",
+"!  c #8C8080",
+"~  c #938789",
+"^  c #9BA9AA",
+"/  c #9BABAB",
+"(  c #9BBDBE",
+")  c #BA9C9E",
+"_  c #A8B8B8",
+"`  c gray75",
+"'  c #BEBFC1",
+"]  c #BFC1BE",
+"[  c #B1C7C5",
+"{  c #B3C5C5",
+"}  c #B5C5C4",
+"|  c #B5C5C5",
+" . c #B6C4C4",
+".. c #B7C5C5",
+"X. c #BAC3C2",
+"o. c #BAC2C4",
+"O. c #BBC4C3",
+"+. c #B8C4C4",
+"@. c #BAC4C5",
+"#. c #BCC0C1",
+"$. c #BDC1C2",
+"%. c #BCC2C0",
+"&. c #BCC2C2",
+"*. c #BFC1C0",
+"=. c #BFC0C2",
+"-. c #BFC3C2",
+";. c #C39796",
+":. c #C0BFBD",
+">. c #C0BEBF",
+",. c #C3BFBC",
+"<. c #C3BFBE",
+"1. c #C6BCBB",
+"2. c #C5BCBD",
+"3. c #C4BEBE",
+"4. c #C5BFBF",
+"5. c #C7BDBC",
+"6. c #C6BDBE",
+"7. c #C7BDBE",
+"8. c #C6BEBC",
+"9. c #CBBBBB",
+"0. c #CBBBBC",
+"q. c #C8BDBB",
+"w. c #CABCBB",
+"e. c #C8BCBC",
+"r. c #C9BDBD",
+"t. c #C8BCBE",
+"y. c #CABCBC",
+"u. c #CCBABA",
+"i. c #CEB9B8",
+"p. c #CFBAB9",
+"a. c #CEBABB",
+"s. c #D5B7B7",
+"d. c #D2B8B7",
+"f. c #D4B8B7",
+"g. c #D6B8B6",
+"h. c #D1B9B9",
+"j. c #D2B8B9",
+"k. c #D6B8B8",
+"l. c #D8B6B5",
+"z. c #D8B6B7",
+"x. c #DCB2B3",
+"c. c #DFB3B2",
+"v. c #DDB3B4",
+"b. c #DEB4B5",
+"n. c #E7AFAE",
+"m. c #E9AFAE",
+"M. c #EDADAD",
+"N. c #E7AFB0",
+"B. c #E4B1AE",
+"V. c #E3B1B2",
+"C. c #E2B2B0",
+"Z. c #E2B2B2",
+"A. c #E4B1B0",
+"S. c #E5B2B1",
+"D. c #F3A5A5",
+"F. c #F7A3A3",
+"G. c #F4A4A3",
+"H. c #F5A4A3",
+"J. c #F1ABAB",
+"K. c #F8A2A1",
+"L. c #FAA2A1",
+"P. c #FCA0A1",
+"I. c #FDA5A4",
+"U. c #FFA5A4",
+"Y. c #FEA6A5",
+"T. c #C1BFC0",
+"R. c #C3BFC0",
+"E. c #C4BEC0",
+"W. c #C0C0BE",
+"Q. c #C1C0BE",
+"!. c #C1C1BF",
+"~. c #C2C1BF",
+"^. c #C0C0C0",
+"/. c #C1C1C1",
+"(. c #C0C0C2",
+"). c #C2C0C1",
+"_. c gray76",
+"`. c #C4C0C1",
+/* pixels */
+"^.^.^.^.T.T.-.^.^.^.^.^.-.^.^.^.` ^.-.-.T.T.^.^.^.",
+"^.^.^.^.-.-.T.T.^.^.^.^.T.T.T.E.y.a.t.E.T.T.^.^.^.",
+"^.^.^.^.^.^.^.^.^.^.^.^.^.T.E.a.b.Z.s.p.E.T.^.^.~.",
+"^.^.^.R.^.^.` ^.^.^.^.^.T.1.h.Z.D.b V.s.t.T.T.^.~.",
+"^.T.T.T.^.^.^.^.T.-.^.^.1.h.N.I.P Z u s.w.~.~.~.` ",
+"^.^.T.^.^.^.^.` ^.^.^.1.h.V.P.H T H M.s.1.` ` ~.^.",
+"^.^.T.^.Q o <.` ^.T.1.h.m.I.K Y H H.c.w.~.~.^.^.^.",
+"^.^.^.^.o ~.W ` @.$.y.c.L.H L Z J.6 ! ^.` ~.^.^.^.",
+"^.^.^.^.o ` o g ; $ 3 w H P m 9 o ; % f %.` ^.^.^.",
+"^.^.^.^.o ` ` $ ( / ;.m H M 5 _ l j s > ..O.-.^.^.",
+"^.^.^.^.o ` ^.+ ^ ~ u M z m.$ k p i a 1 [ X.` -.^.",
+"T.^.` ` <.O w.4 ) t z z w j.< h i i a 1 [ X.` ` R.",
+"^.^.^.R.1.9.V.r z B b E 6 ~.> d a a 0 ; ..$.^.^.^.",
+"^.^.^.E.9.x.H.Z L G r 8 a.%.{ $ > > % ..o.` ^.^.^.",
+"^.^.~.y.f.M.H R H F.Z.h.R.` ` @.....$.$.` ^.^.^.^.",
+"^.` <.w.s.u H U I.B.j.1.^.-.` ` ^.^.^.^.-.^.^.^.^.",
+"^.^.~.w.f.B.c H.Z.h.y.R.^.^.R.^.^.^.^.^.^.^.^.^.^.",
+"^.^.~.1.i.s.B.Z.h.E.R.^.^.^.^.^.^.^.^.^.^.^.^.^.^.",
+"^.^.^.~.E.1.9.9.y.R.^.^.^.-.^.^.^.^.^.^.^.^.^.^.^.",
+"` ` ^.^.^.` <.^.T.T.^.^.^.^.^.^.^.^.^.^.^.^.^.^.^."
+};
+EOT
+} # filter_switch_xpm }}}
+
+sub thumbs_xpm { # {{{
 
 =head2 thumbs_xpm()
 
@@ -1982,9 +2296,179 @@ static char *thumbs[] = {
 };
 EOT
 
-} # thumbs_xpm }}}
+} # thumbs_xpm }}} }}}
 
-sub rotate_left_xpm {
+sub dias_xpm { # {{{
+
+=head2 dias_xpm()
+
+Returns a symbol for "Diashow" Dialog.
+
+=cut
+
+
+return <<'EOT';
+/* XPM */
+static char *dias[] = {
+/* columns rows colors chars-per-pixel */
+"16 14 136 2",
+"   c black",
+".  c #010101",
+"X  c #000202",
+"o  c #000400",
+"O  c #000500",
+"+  c #000405",
+"@  c #000504",
+"#  c #000505",
+"$  c #000605",
+"%  c #000A00",
+"&  c #000C00",
+"*  c #000F00",
+"=  c #000809",
+"-  c #000909",
+";  c #000A09",
+":  c #000F09",
+">  c #000D0C",
+",  c #000C0E",
+"<  c #000E0E",
+"1  c #000E10",
+"2  c #001000",
+"3  c #001300",
+"4  c #001602",
+"5  c #001407",
+"6  c #00170B",
+"7  c #001900",
+"8  c #001A00",
+"9  c #001D00",
+"0  c #001E00",
+"q  c #001112",
+"w  c #001212",
+"e  c #001413",
+"r  c #001617",
+"t  c #001919",
+"y  c #001D1C",
+"u  c #003318",
+"i  c #002523",
+"p  c #002625",
+"a  c #003421",
+"s  c #007B2D",
+"d  c #007636",
+"f  c #03723D",
+"g  c #00753D",
+"h  c #00793D",
+"j  c #146A3B",
+"k  c #3F5F0C",
+"l  c #3A5A29",
+"z  c #216439",
+"x  c #006F5D",
+"c  c #007646",
+"v  c #007C40",
+"b  c #00755D",
+"n  c #136946",
+"m  c #1B6446",
+"M  c #1B7E48",
+"N  c #23784F",
+"B  c #237756",
+"V  c #237658",
+"C  c #21765F",
+"Z  c #23755E",
+"A  c #2A715F",
+"S  c #257363",
+"D  c #22736D",
+"F  c #227468",
+"G  c #376A65",
+"H  c #495139",
+"J  c #008436",
+"K  c #00883D",
+"L  c #10863C",
+"P  c #008246",
+"I  c #008E64",
+"U  c #008A76",
+"Y  c #2AA69B",
+"T  c #3CEFB7",
+"R  c #19FADC",
+"E  c #0BFBFA",
+"W  c #17F7EC",
+"Q  c #13FAE6",
+"!  c #16F7F1",
+"~  c #16F6F6",
+"^  c #12F9F3",
+"/  c #13FAF4",
+"(  c #24F6D1",
+")  c #3FE7DA",
+"_  c #39EAD6",
+"`  c #2FEBEC",
+"'  c #21F4E1",
+"]  c #24F2E6",
+"[  c #21F2EC",
+"{  c #21F1F1",
+"}  c #32EBE6",
+"|  c #35E9E8",
+" . c #3AE6E6",
+".. c #39E8E3",
+"X. c #38E8E6",
+"o. c #5E8E8E",
+"O. c #5C908C",
+"+. c #4EDEDE",
+"@. c #51DDDC",
+"#. c #51DDDE",
+"$. c #56DBDA",
+"%. c #56DADC",
+"&. c #59D9DA",
+"*. c #40EAC6",
+"=. c #4DE2CF",
+"-. c #41E6D5",
+";. c #52E1CF",
+":. c #43E3E3",
+">. c #40E4E3",
+",. c #64D4D5",
+"<. c #68D4D4",
+"1. c #7BCBCC",
+"2. c #78CCCC",
+"3. c #70D0CF",
+"4. c #77FFFF",
+"5. c #808080",
+"6. c #9DBDBC",
+"7. c #8AC4C5",
+"8. c #8BFFFF",
+"9. c #B6C4C4",
+"0. c #B9C3C4",
+"q. c #BCFFFF",
+"w. c #DAF2A8",
+"e. c #C0C0C0",
+"r. c #C7FFFF",
+"t. c #CFFFFF",
+"y. c #E9FFFF",
+"u. c #EBFFFF",
+"i. c #F1FFFA",
+"p. c #F1FFFF",
+"a. c #F7FFFB",
+"s. c #F4FFFF",
+"d. c #F5FFFF",
+"f. c #FBFFFA",
+"g. c #F8FFFF",
+"h. c #FEFFFF",
+/* pixels */
+"                                ",
+"s.$ u.; u.; u.; u.; u.; p.$ u.; ",
+"< w t y y y y y y y y t w w t y ",
+"1.y &.#.$.$.#.+.+.$.<.2.7.r %.:.",
+",.p :.>.#.@. . .X.#.t.u.p.w  .~ ",
+"3.i | 4.8.8.4.{ { 8.r.u.i.6 } E ",
+"6.t ` ^ ( [ / E E [ =.q.z 9 ) { ",
+"H 4 ..W ( I R Q W ] *.c j 9 Y +.",
+"w.8 ;._ P J K T ) U h d B 5 o.o.",
+"k 8 u b g L s h u x f M A < 9.5.",
+"l 4 m Z Z B N n D D S S G ; 9.e.",
+"% % * * : : * * : < 1 < ; $     ",
+"f.@ a.@ s.@ s.@ s.$ s.$ h.  h.  ",
+"                                "
+};
+EOT
+
+} # dias_xpm }}} }}}
+
+sub rotate_left_xpm { # {{{
 
 =head2 rotate_left_xpm()
 
@@ -2024,9 +2508,9 @@ static char *rotate-left[] = {
 "X X X X X X X X X X X X X X X X X X X X X X "
 };
 EOT
-} # rotate_left_xpm
+} # rotate_left_xpm }}}
 
-sub rotate_right_xpm {
+sub rotate_right_xpm { # {{{
 
 =head2 rotate_right_xpm()
 
@@ -2066,7 +2550,7 @@ static char *rotate-right[] = {
 "X X X X X X X X X X X X X X X X X X X X X X "
 };
 EOT
-} # rotate_right_xpm
+} # rotate_right_xpm }}}
 
 sub exit_xpm { #{{{
 
@@ -2307,7 +2791,7 @@ Returns a symbol for an "Crossed out Eye" button.
 
   return <<'EOT';
 /* XPM */
-static char *eye[] = {
+static char *noeye[] = {
 /* columns rows colors chars-per-pixel */
 "20 18 96 2",
 "5  c #00004B",
@@ -2629,6 +3113,305 @@ static char *schloss[] = {
 EOT
 } # lock_xpm }}}
 
+sub money_xpm { # {{{
+
+=head2 money_xpm()
+
+Returns a 32 x 32 symbol for money.
+
+=cut
+
+  return <<'EOT';
+/* XPM */
+static char *geld[] = {
+/* columns rows colors chars-per-pixel */
+"25 25 256 2",
+"   c #0D5C7B",
+".  c #104C68",
+"X  c #1E5A6C",
+"o  c #14516B",
+"O  c #155E7D",
+"+  c #195973",
+"@  c #1D5D78",
+"#  c #0D4866",
+"$  c #1D637C",
+"%  c #186577",
+"&  c #314F57",
+"*  c #355153",
+"=  c #23596C",
+"-  c #24566F",
+";  c #215C71",
+":  c #225E7A",
+">  c #395E67",
+",  c #3D625A",
+"<  c #2E676E",
+"1  c #2B6473",
+"2  c #276678",
+"3  c #366C79",
+"4  c #3C717A",
+"5  c #6C5B3F",
+"6  c #7D5F3D",
+"7  c #4E4E49",
+"8  c #465455",
+"9  c #514C46",
+"0  c #595C59",
+"q  c #555A57",
+"w  c #45696C",
+"e  c #4B6D6C",
+"r  c #456C67",
+"t  c #4B6972",
+"y  c #526A67",
+"u  c #5C7877",
+"i  c #625F5A",
+"p  c #6C6650",
+"a  c #786142",
+"s  c #7C6F56",
+"d  c #646965",
+"f  c #7B7462",
+"g  c #7E7868",
+"h  c #777874",
+"j  c #6A7674",
+"k  c #1B6483",
+"l  c #1D6B84",
+"z  c #1C688A",
+"x  c #166686",
+"c  c #1F738F",
+"v  c #256C84",
+"b  c #236C8B",
+"n  c #2B6B84",
+"m  c #2A6D8A",
+"M  c #236D90",
+"N  c #26738C",
+"B  c #2B728D",
+"V  c #2D788F",
+"C  c #257492",
+"Z  c #2B7593",
+"A  c #2B7994",
+"S  c #2C7C9B",
+"D  c #2A7599",
+"F  c #326D86",
+"G  c #376C8B",
+"H  c #327384",
+"J  c #33738D",
+"K  c #337D8B",
+"L  c #387587",
+"P  c #337C94",
+"I  c #347C9B",
+"U  c #3C7994",
+"Y  c #3B7D99",
+"T  c #397595",
+"R  c #477886",
+"E  c #447C91",
+"W  c #517D8A",
+"Q  c #667C84",
+"!  c #747F81",
+"~  c #7C806F",
+"^  c #78867C",
+"/  c #36808B",
+"(  c #338295",
+")  c #34829B",
+"_  c #3B819C",
+"`  c #3D879A",
+"'  c #3B83A1",
+"]  c #3B89A5",
+"[  c #3F8CAC",
+"{  c #3789A1",
+"}  c #438198",
+"|  c #418999",
+" . c #4A8293",
+".. c #4A8697",
+"X. c #558A88",
+"o. c #51909B",
+"O. c #5F959F",
+"+. c #588E9A",
+"@. c #438DA4",
+"#. c #4C8BA3",
+"$. c #4A8DAA",
+"%. c #4485A1",
+"&. c #4190A4",
+"*. c #4A92AD",
+"=. c #4596AC",
+"-. c #4696B3",
+";. c #4D95B2",
+":. c #4E9AB4",
+">. c #4F9CB8",
+",. c #538FA3",
+"<. c #5394AA",
+"1. c #519BAC",
+"2. c #5896AB",
+"3. c #589AAD",
+"4. c #5695A4",
+"5. c #529BB3",
+"6. c #5899B4",
+"7. c #5C9EB9",
+"8. c #549EB9",
+"9. c #54A2B9",
+"0. c #5DA2BE",
+"q. c #5AA1B5",
+"w. c #688486",
+"e. c #6A8189",
+"r. c #6B8E90",
+"t. c #63928C",
+"y. c #68969B",
+"u. c #788688",
+"i. c #748C93",
+"p. c #7A918B",
+"a. c #779796",
+"s. c #6A9CB4",
+"d. c #619DB7",
+"f. c #7C9BA4",
+"g. c #6199A8",
+"h. c #62A1B8",
+"j. c #6CA4B4",
+"k. c #67A6BA",
+"l. c #78AAB9",
+"z. c #7BB7B7",
+"x. c #71A5A6",
+"c. c #5CA3C1",
+"v. c #6BABC4",
+"b. c #64A8C1",
+"n. c #7AB5C5",
+"m. c #7AB6CF",
+"M. c #76B4CC",
+"N. c #7AB6D0",
+"B. c #81572D",
+"V. c #855B33",
+"C. c #94673E",
+"Z. c #AA6732",
+"A. c #8F6E4B",
+"S. c #8A6F51",
+"D. c #95744E",
+"F. c #9A7956",
+"G. c #857458",
+"H. c #82887E",
+"J. c #938164",
+"K. c #998061",
+"L. c #9E927A",
+"P. c #B2834D",
+"I. c #B58456",
+"U. c #A59073",
+"Y. c #DA935F",
+"T. c #C69C74",
+"R. c #EAAD7E",
+"E. c #808684",
+"W. c #859B9C",
+"Q. c #8A9A99",
+"!. c #929687",
+"~. c #80A39F",
+"^. c #86A9A4",
+"/. c #8BACB7",
+"(. c #8CB4BC",
+"). c #89B9B8",
+"_. c #96ABA7",
+"`. c #93ACB0",
+"'. c #9CBBB4",
+"]. c #99B7B6",
+"[. c #A7BEB4",
+"{. c #B7B1A1",
+"}. c #AEAA8D",
+"|. c #81B7CC",
+" X c #84BAC7",
+".X c #82BCD4",
+"XX c #88BED7",
+"oX c #9ABEC0",
+"OX c #95BDC4",
+"+X c #96C4BF",
+"@X c #A8C4BD",
+"#X c #8BC2C8",
+"$X c #8BC2D2",
+"%X c #88C5DD",
+"&X c #87C4D3",
+"*X c #9CCACD",
+"=X c #95C4CA",
+"-X c #95CBD2",
+";X c #99C7D1",
+":X c #9BCCD9",
+">X c #94C6D5",
+",X c #94D2D4",
+"<X c #98D3D5",
+"1X c #9DDBDE",
+"2X c #99D4DB",
+"3X c #A4C3C4",
+"4X c #A2C5C8",
+"5X c #A6CDCC",
+"6X c #AAC8C8",
+"7X c #A2CED5",
+"8X c #A3D0CE",
+"9X c #A8D1C7",
+"0X c #A3D3D4",
+"qX c #A3D2DD",
+"wX c #A2DBDB",
+"eX c #ABD4D4",
+"rX c #B5CBC6",
+"tX c #B6D6CB",
+"yX c #BDDEDD",
+"uX c #B6D6D1",
+"iX c #AADCE6",
+"pX c #B6DAE5",
+"aX c #A8E2E3",
+"sX c #BCE2E5",
+"dX c #BBE9EC",
+"fX c #B8E4ED",
+"gX c #B7ECF2",
+"hX c #BBEBF1",
+"jX c #CEA780",
+"kX c #CCB194",
+"lX c #D1AF8A",
+"zX c #D9B38E",
+"xX c #DCBE9C",
+"cX c #E1AE81",
+"vX c #F0B482",
+"bX c #EDB789",
+"nX c #E3C09A",
+"mX c #E7D8AF",
+"MX c #C0D7C5",
+"NX c #C4DEDD",
+"BX c #D5D7D2",
+"VX c #C6E3DD",
+"CX c #D0E7DF",
+"ZX c #C4E3E3",
+"AX c #C0E6EC",
+"SX c #C3EBEB",
+"DX c #C9E6E4",
+"FX c #CEEDE4",
+"GX c #CCEAEB",
+"HX c #C5EAF0",
+"JX c #D1EAE3",
+"KX c #DDE8E2",
+"LX c #DDF5E5",
+"PX c #E3EDE8",
+"IX c #EAF7F0",
+"UX c #E0F7E5",
+/* pixels */
+"V.jXnXD.a S.J.J.s f ^ [.VXZXZXe.y ^ , 9XSX8Xa.+X@X",
+"C.B.D.A.F.a G.L.g H.[.yXSXSXDXZXe ~.x.r eXSX].uXUX",
+"cXI.V.lXK.a s !.Q.`.;XiXgXdXAXSX5Xe a.e f.HXZXFXUX",
+"vXbXT.xXJ.p g _./. .X L  XgXhXHXAXr.w & t 6XGXFXUX",
+"Y.vXlXU.f !._.(.E - %.2 X l.gXgXAXAXf.Q i.! uXJXLX",
+"Z.F.kXf u.`.(.|.- $.XXN.U X #X-X;XHXpXi.u i.e.DXJX",
+"P.F.kXW./.s.s..Xk E %X%X&Xn 3 n. XqXAX4XW.].'.@XVX",
+"mX}._./.- # # J %.o N.%XM.5.$ 1.n.|.pXsX`.rXCXCXFX",
+"tX@X).= G m.d.. d.: G v.c.c.m Y M.n. XfXsXDXCXIXPX",
+"wXwX&X .|.XXXXn $.6.+ T 7.c.M I v.v.z.$XdXyXrXPXBX",
+"wXwX2X#XOX>X>XT E b.$.@ m m b ;.0.b.k.j.2XdXDX@XPX",
+",Xy.z.8X+XOXXXG Y s.d.2.Y I >.[ ' ) ` } 4.-XpXNXPX",
+"-XX.X.+X9X).x.1 o.O.3  .7.9.-.] S Z v B } 4.iXsX'.",
+"aX).^ t.eXx.g.1 X.< < o.3.9.) ( A C I $ B J } iXqX",
+"aX1X1.X.,X$X,.+ % H 4.1.9.=.) c Z ] I I k b F s.hX",
+"1X,X,Xz.2X&XK n v v ( ( ` ` ( l C I I M M I J U >X",
+",X,X1X,X2Xo.H % $ N x N K K K % v N M D z z I 6.,.",
+",X,X,X<X+X4 < L V C   l % % K $ % z x x D [ I 7.k.",
+"<X0X9X8X~.r w R 5.) x x % l N k x D b S D -.;.$.h.",
+"0X*X8XtXp.y * t 3 K z ) N { v $ k k M =.] ' >.*.*.",
+"0X7X4X6X^ 0 7 8 > 1 m C x ) | 2 2 _ D ' -.' -.;.*.",
+":XqX=X6XQ.0 7 p 8 > = P [ ( | o.@ ' *.' *.$.I ;.8.",
+"qX:X;XoX6Xd 7 i q Q W L =.=.&.@.@.B $.$.%.<.$._ v.",
+":X:X;XOXoX_.d h 0 h i.X.4.=.] ;.8.I ' ;.$.$.6.v.|.",
+":X;X>XOXOX4Xu.h E.j a.i.R 6.5.@.0.c.D ;.*.7..X|.l."
+};
+EOT
+} # money_xpm }}}
+
 1;
 
 __END__
@@ -2656,4 +3439,4 @@ Revision History: {{{1
   $Log: $
 
 
-# vim:foldmethod=marker:foldcolumn=4:ft=perl
+# vim:ft=perl:foldmethod=marker:foldcolumn=4

@@ -1,5 +1,12 @@
 Revision history for Perl extension Tk::XPMs.
 
+1.09  Tue Sep  11 16:12:18 2007
+  - tools_1_xpm
+
+1.08  Tue Jun  12 13:45:16 2007
+  - Terminate test with $top->after(3000, ...)
+  - dias_xpm, money_xpm, filter_xpm, filter_switch_xpm
+
 1.07  Wed Oct  26 18:23:45 2005
   - tools_xpm, stop_xpm, thumbs_xpm, eye_xpm, noeye_xpm, lock_xpm icons added
 

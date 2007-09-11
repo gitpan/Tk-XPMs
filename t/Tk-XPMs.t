@@ -5,7 +5,7 @@
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
-use Test::More tests => 2 + 44;
+use Test::More tests => 2 + 49;
 BEGIN {
   use Tk::XPMs ":all";
   ok(1, "use");
@@ -106,11 +106,12 @@ foreach my $xp ( list_xpms() ) {
 
 $lb_status_line -> pack(-side => 'bottom', -expand => 'no', -fill => 'x');
 
+$top->after(3000, sub{ ok(1, "Exit 3000"); exit } );
 # Main Event Loop
 # ---------------
 MainLoop;
 
 __END__
 
-# vim:foldmethod=marker:foldcolumn=4:ft=perl
+# vim:ft=perl:foldmethod=marker:foldcolumn=4
 

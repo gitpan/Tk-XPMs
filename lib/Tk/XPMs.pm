@@ -4,12 +4,15 @@ use vars qw(@EXPORT_OK $VERSION);
 use warnings;
 use strict;
 
-our $VERSION = "1.09";
+our $VERSION = "1.10";
 
 use Exporter;
 our @ISA=qw(Exporter);
 
 my @xpm_list = qw(
+  box_nonsel_xpm
+  box_yellow_xpm
+  box_sel_xpm
   tools_1_xpm
   tools_xpm
   exit_xpm
@@ -3412,6 +3415,95 @@ static char *geld[] = {
 EOT
 } # money_xpm }}}
 
+sub box_nonsel_xpm { # {{{
+
+=head2 box_nonsel_xpm()
+
+Returns a symbol for a not selected checkbox
+
+=cut
+
+  return <<'EOT';
+/* XPM */
+static char * file_xpm[] = {
+"14 12 3 1",
+" 	s None	c None",
+".	c #000000000000",
+"x	c white",
+"..............",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".............."};
+EOT
+} # box_nonsel_xpm }}}
+
+sub box_yellow_xpm { # {{{
+
+=head2 box_yellow_xpm()
+
+Returns a symbol for a not selected yellow checkbox
+
+=cut
+
+  return <<'EOT';
+/* XPM */
+static char * file_xpm[] = {
+"14 12 3 1",
+" 	s None	c None",
+".	c #000000000000",
+"x	c yellow",
+"..............",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".xxxxxxxxxxxx.",
+".............."};
+EOT
+} # box_yellow_xpm }}}
+
+sub box_sel_xpm { # {{{
+
+=head2 box_sel_xpm()
+
+Returns a symbol for a selected checkbox
+
+=cut
+
+  return <<'EOT';
+/* XPM */
+static char * file_xpm[] = {
+"14 12 3 1",
+" 	s None	c None",
+".	c #000000000000",
+"x	c yellow",
+"..............",
+".xxxxxxxxxxxx.",
+".x.xxxxxxx.xx.",
+".xx.xxxxx.xxx.",
+".xxx.xxx.xxxx.",
+".xxxx.x.xxxxx.",
+".xxxxx.xxxxxx.",
+".xxxx.x.xxxxx.",
+".xxx.xxx.xxxx.",
+".xx.xxxxx.xxx.",
+".x.xxxxxxx.xx.",
+".............."};
+EOT
+} # box_sel_xpm }}}
 1;
 
 __END__

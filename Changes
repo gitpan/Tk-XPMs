@@ -1,5 +1,10 @@
 Revision history for Perl extension Tk::XPMs.
 
+1.10  Mon Dec  24 09:26:13 2008
+  - box_nonsel_xpm
+  - box_yellow_xpm
+  - box_sel_xpm
+
 1.09  Tue Sep  11 16:12:18 2007
   - tools_1_xpm
 

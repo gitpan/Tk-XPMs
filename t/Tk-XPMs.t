@@ -1,30 +1,29 @@
 # Before `make install' is performed this script should be runnable with
-# `make test'. After `make install' it should work as `perl 1.t'
+# `make test'. After `make install' it should work as `perl Tk-XPMs.t'
 
 #########################
 
-# change 'tests => 1' to 'tests => last_test_to_print';
+use strict;
+use warnings;
 
-use Test::More tests => 2 + 52;
+#use Test::More tests => 2 + 52;
+use Test::More 'no_plan';
 BEGIN {
   use Tk::XPMs ":all";
   ok(1, "use");
 };
-
-#########################
-
-# Insert your test code below, the Test::More module is use()ed here so read
-# its man page ( perldoc Test::More ) for help writing this test script.
 
 #===================================================================
 
 use Tk;
 use Tk::ErrorDialog;
 
-use strict;
-
-
 my $top = MainWindow->new();
+if (! $top) {
+  # there seems to be no x-server available or something else went wrong
+  # .. skip all tests
+  exit 0;
+}
 
 
 my $VERSION = "1.01";
@@ -85,22 +84,24 @@ $frm->pack;
 
 my ($i, $j) = (0, 0);
 foreach my $xp ( list_xpms() ) {
+foreach my $color ( "", "#ccddee" ) {
   my $p1;
-  eval "\$p1 = \$top->Pixmap(-data=>${xp}());";
+  eval "\$p1 = \$top->Pixmap(-data=>${xp}('$color'));";
   ok(!$@, $xp);
   my $b1 = $frm->Button(
     -image     => $p1,
     -width     => 34,
     -height     => 34,
     -command   => sub{
-                    $status = "${xp}()";
+                    $status = "${xp}('$color')";
                   },
     -state     => "normal",
     ) ;
    
   $b1-> grid(-column => $j, -row => $i, -sticky => "w", -padx => 3, -pady => 3);
-  $j = ($j+1)%5;
+  $j = ($j+1)%25;
   $i++ if $j == 0;
+} # foreach $color
 } # foreach $xp
 
 

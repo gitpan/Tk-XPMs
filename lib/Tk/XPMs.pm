@@ -4,12 +4,13 @@ use vars qw(@EXPORT_OK $VERSION);
 use warnings;
 use strict;
 
-our $VERSION = "1.10";
+our $VERSION = "1.11";
 
 use Exporter;
 our @ISA=qw(Exporter);
 
-my @xpm_list = qw(
+my @xpm_list = # {{{
+qw(
   box_nonsel_xpm
   box_yellow_xpm
   box_sel_xpm
@@ -35,6 +36,7 @@ my @xpm_list = qw(
   arrow_up_xpm
   arrow_down_xpm
   arrow_left_blue_xpm arrow_right_blue_xpm
+  arrow_left_xpm arrow_right_xpm
   arrow_first_xpm
   arrow_prev_xpm
   arrow_ppage_xpm
@@ -58,8 +60,9 @@ my @xpm_list = qw(
   lock_xpm
   filter_xpm
   filter_switch_xpm
-);
-our %EXPORT_TAGS = ( 
+); # }}}
+
+our %EXPORT_TAGS = ( # {{{
   'all' => [ @xpm_list,
               "list_xpms"
            ] ,
@@ -80,11 +83,13 @@ our %EXPORT_TAGS = (
                    arrow_last_xpm
                    arrow_left_blue_xpm
                    arrow_right_blue_xpm
+                   arrow_left_xpm
+                   arrow_right_xpm
                  )
            ] ,
 
 
-);
+); # }}}
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
@@ -368,36 +373,39 @@ EOT
 
 sub folder_xpm { # {{{
 
-=head2 folder_xpm()
+=head2 folder_xpm( $color )
 
 Returns a 16 x 12 symbol for a folder.
+The $color parameter is optional.
+Default color is "#f0ff80".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#f0ff80";
+  return <<"EOT";
 /* XPM */
 static char * folder_xpm[] = {
 /* width height num_colors chars_per_pixel */
-"16 12 5 1",
-/* colors */
-" 	s None	c None",
-".	c black",
-"X	c #f0ff80",
-"v	c #f0dd70",
-"g	c #eeeeee",
+\"16 12 5 1\",
+\/* colors */
+\" 	s None	c None\",
+\".	c black\",
+\"X	c $color\",
+\"v	c #f0dd70\",
+\"g	c #eeeeee\",
 /* pixels */
-"   ggg.         ",
-"  gXXXX.        ",
-" gXXXXXX.       ",
-"gggggggggggg.   ",
-"gXXXXXXXXXXX.   ",
-"gXXXXXXXXXXX.   ",
-"gXXXXXXXXXXX.   ",
-"gXXXXXXXXXXX.   ",
-"gXXXXXXXXXvv.   ",
-"gXXXXXXXvvvv.   ",
-"gXXXvvvvvvvv.   ",
-".............   "};
+\"   ggg.         \",
+\"  gXXXX.        \",
+\" gXXXXXX.       \",
+\"gggggggggggg.   \",
+\"gXXXXXXXXXXX.   \",
+\"gXXXXXXXXXXX.   \",
+\"gXXXXXXXXXXX.   \",
+\"gXXXXXXXXXXX.   \",
+\"gXXXXXXXXXvv.   \",
+\"gXXXXXXXvvvv.   \",
+\"gXXXvvvvvvvv.   \",
+\".............   \"};
 EOT
 } # folder_xpm }}}
 
@@ -454,35 +462,38 @@ EOT
 
 sub openfolder_xpm { # {{{
 
-=head2 openfolder_xpm()
+=head2 openfolder_xpm( $color )
 
 Returns a 17 x 15 open folder symbol.
+The $color parameter is optional.
+Default color is "#f0ff80".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#f0ff80";
+  return <<"EOT";
 /* XPM */
 static char * openfolder_xpm[] = {
 /* width height num_colors chars_per_pixel */
-"17 15 3 1",
+\"17 15 3 1\",
 /* colors */
-" 	s None	c None",
-".	c black",
-"X	c #f0ff80",
+\" 	s None	c None\",
+\".	c black\",
+\"X	c $color\",
 /* pixels */
-"                 ",
-"    ....         ",
-"   .XXXX.        ",
-"  .XXXXXX.       ",
-" .............   ",
-" .XXXXXXXXXXX.   ",
-" .XXX............",
-" .XX.XXXXXXXXXXX.",
-" .XX.XXXXXXXXXX. ",
-" .X.XXXXXXXXXXX. ",
-" .X.XXXXXXXXXXX. ",
-" ..XXXXXXXXXX..  ",
-" .............   ",
+\"                 \",
+\"    ....         \",
+\"   .XXXX.        \",
+\"  .XXXXXX.       \",
+\" .............   \",
+\" .XXXXXXXXXXX.   \",
+\" .XXX............\",
+\" .XX.XXXXXXXXXXX.\",
+\" .XX.XXXXXXXXXX. \",
+\" .X.XXXXXXXXXXX. \",
+\" .X.XXXXXXXXXXX. \",
+\" ..XXXXXXXXXX..  \",
+\" .............   \",
 "                 ",
 "                 ",
 };
@@ -491,97 +502,104 @@ EOT
 
 sub textfile_xpm { # {{{
 
-=head2 textfile_xpm()
+=head2 textfile_xpm( $color )
 
 Returns a 12 x 12 symbol for a windows text file.
+The $color parameter is optional. Default color is "white".
 
 =cut
 
-  return <<'EOT';
+#"X	c #E0E0FFFFE0E0",
+  my $color = shift || "white";
+  return <<"EOT";
 /* XPM */
 static char * textfile_xpm[] = {
-"12 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c #E0E0FFFFE0E0",
-" ........   ",
-" .XXXXXX.   ",
-" .XXXXXX... ",
-" .X....XXX. ",
-" .XXXXXXXX. ",
-" .X...XXXX. ",
-" .XXXXXXXX. ",
-" .X.....XX. ",
-" .XXXXXXXX. ",
-" .X.....XX. ",
-" .XXXXXXXX. ",
-" .......... "};
+\"12 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\" ........   \",
+\" .XXXXXX.   \",
+\" .XXXXXX... \",
+\" .X....XXX. \",
+\" .XXXXXXXX. \",
+\" .X...XXXX. \",
+\" .XXXXXXXX. \",
+\" .X.....XX. \",
+\" .XXXXXXXX. \",
+\" .X.....XX. \",
+\" .XXXXXXXX. \",
+\" .......... \"};
 EOT
 } # textfile_xpm }}}
 
 sub srcfile_xpm { # {{{
 
-=head2 srcfile_xpm()
+=head2 srcfile_xpm( $color )
 
 Returns a symbol for a source file.
+The $color parameter is optional. Default color is "white".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "white";
+  return <<"EOT";
 /* XPM */
 static char * srcfile_xpm[] = {
-"12 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c gray91",
-" ........   ",
-" .XXXXXX.   ",
-" .XXXXXX... ",
-" .XXXXXXXX. ",
-" .XX...XXX. ",
-" .X.XXX.XX. ",
-" .X.XXXXXX. ",
-" .X.XXXXXX. ",
-" .XX....XX. ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .......... "};
+\"12 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\" ........   \",
+\" .XXXXXX.   \",
+\" .XXXXXX... \",
+\" .XXXXXXXX. \",
+\" .XX...XXX. \",
+\" .X.XXX.XX. \",
+\" .X.XXXXXX. \",
+\" .X.XXXXXX. \",
+\" .XX....XX. \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .......... \"};
 EOT
 } # srcfile_xpm }}}
 
 sub file_xpm { # {{{
 
-=head2 file_xpm()
+=head2 file_xpm( $color )
 
 Returns a symbol for a file.
+The $color parameter is optional. Default color is "white".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "white";
+  return <<"EOT";
 /* XPM */
 static char * file_xpm[] = {
-"12 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-" ........   ",
-" .XXXXXX.   ",
-" .XXXXXX... ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .XXXXXXXX. ",
-" .......... "};
+\"12 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\" ........   \",
+\" .XXXXXX.   \",
+\" .XXXXXX... \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .XXXXXXXX. \",
+\" .......... \"};
 EOT
 } # file_xpm }}}
 
 sub winfolder_xpm { # {{{
 
-=head2 winfolder_xpm()
+=head2 winfolder_xpm( )
 
 Returns a symbol for a windows folder.
 
@@ -634,7 +652,7 @@ sub winact_folder_xpm { # {{{
 
 =head2 winact_folder_xpm()
 
-Returns a symbol for a windows open folder.
+Returns a symbol for a opened windows folder.
 
 =cut
 
@@ -683,47 +701,51 @@ EOT
 
 sub act_folder_xpm { # {{{
 
-=head2 act_folder_xpm()
+=head2 act_folder_xpm( $color )
 
-Returns a symbol for an open windows folder.
+Returns a symbol for an opened windows folder.
+The $color parameter is optional. Default color is "yellow".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "yellow";
+  return <<"EOT";
 /* XPM */
 static char * act_folder_xpm[] = {
 /* width height num_colors chars_per_pixel */
-"16 12 4 1",
+\"16 12 4 1\",
 /* colors */
-" 	s None	c None",
-".	c black",
-"X	c yellow",
-"o	c #5B5B57574646",
+\" 	s None	c None\",
+\".	c black\",
+\"X	c $color\",
+\"o	c #5B5B57574646\",
 /* pixels */
-"   ....         ",
-"  .XXXX.        ",
-" .XXXXXX.       ",
-".............   ",
-".oXoXoXoXoXo.   ",
-".XoX............",
-".oX.XXXXXXXXXXX.",
-".Xo.XXXXXXXXXX. ",
-".o.XXXXXXXXXXX. ",
-".X.XXXXXXXXXXX. ",
-"..XXXXXXXXXX..  ",
-".............   "};
+\"   ....         \",
+\"  .XXXX.        \",
+\" .XXXXXX.       \",
+\".............   \",
+\".oXoXoXoXoXo.   \",
+\".XoX............\",
+\".oX.XXXXXXXXXXX.\",
+\".Xo.XXXXXXXXXX. \",
+\".o.XXXXXXXXXXX. \",
+\".X.XXXXXXXXXXX. \",
+\"..XXXXXXXXXX..  \",
+\".............   \"};
 EOT
 } # act_folder_xpm }}}
 
 sub wintext_xpm { # {{{
 
-=head2 wintext_xpm()
+=head2 wintext_xpm( $color )
 
 Returns a symbol for a text file.
+The $color parameter is optional. Default color is "white".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "white";
+  return <<"EOT";
 /* XPM */
 static char *wintext[] = {
 /* width height num_colors chars_per_pixel */
@@ -738,7 +760,7 @@ static char *wintext[] = {
 "d c #008080",
 "e c #000080",
 "f c #800080",
-"g c #ffffff",
+"g c $color\",
 "h c #c0c0c0",
 "i c #ff0000",
 "j c #ffff00",
@@ -841,20 +863,22 @@ EOT
 
 sub Camel_xpm { # {{{
 
-=head2 Camel_xpm()
+=head2 Camel_xpm( $color )
 
 Returns a camel icon.
+The $color parameter is optional. Default color is "#7f7f00".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#7f7f00";
+  return <<"EOT";
 /* XPM */
 static char *Camel[] = {
 /* width height num_colors chars_per_pixel */
 "    32    32        2            1",
 /* colors */
 ". c #ffffff",
-"# c #7f7f00",
+"# c $color",
 /* pixels */
 "................................",
 "................................",
@@ -894,61 +918,66 @@ EOT
 
 sub arrow_up_xpm { # {{{
 
-=head2 arrow_up_xpm()
+=head2 arrow_up_xpm( $color )
 
-Returns a symbol for an up-arrow.
+Returns a symbol for an up-arrow. 
+The $color parameter is optional.
+Default color is "white".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "white";
+  return <<"EOT";
 /* XPM */
 static char * arrow_up_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"                    ",
-"         ..         ",
-"        .XX.        ",
-"       .XXXX.       ",
-"      .XXXXXX.      ",
-"     ....XX....     ",
-"        .XX.        ",
-"        .XX.        ",
-"        .XX.        ",
-"        .XX.        ",
-"        ....        ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\"                    \",
+\"         ..         \",
+\"        .XX.        \",
+\"       .XXXX.       \",
+\"      .XXXXXX.      \",
+\"     ....XX....     \",
+\"        .XX.        \",
+\"        .XX.        \",
+\"        .XX.        \",
+\"        .XX.        \",
+\"        ....        \",
+\"                    \"};
 EOT
 } # arrow_up_xpm }}}
 
 sub arrow_down_xpm { # {{{
 
-=head2 arrow_down_xpm()
+=head2 arrow_down_xpm( $color )
 
-Returns a symbol for a down-arrow.
+Returns a symbol for a down-arrow. The $color parameter is optional.
+Default color is "white".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "white";
+  return <<"EOT";
 /* XPM */
 static char * arrow_down_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c red",
-"                    ",
-"        ....        ",
-"        .XX.        ",
-"        .XX.        ",
-"        .XX.        ",
-"        .XX.        ",
-"     ....XX....     ",
-"      .XXXXXX.      ",
-"       .XXXX.       ",
-"        .XX.        ",
-"         ..         ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000",
+\"X	c $color\",
+\"                    \",
+\"        ....        \",
+\"        .XX.        \",
+\"        .XX.        \",
+\"        .XX.        \",
+\"        .XX.        \",
+\"     ....XX....     \",
+\"      .XXXXXX.      \",
+\"       .XXXX.       \",
+\"        .XX.        \",
+\"         ..         \",
+\"                    \"};
 EOT
 } # arrow_down_xpm }}}
 
@@ -960,36 +989,8 @@ Returns a symbol for a blue left arrow.
 
 =cut
 
-  return <<'EOT';
-/* XPM */
-static char *arrow_left_blue[] = {
-/* columns rows colors chars-per-pixel */
-"20 20 2 1",
-".	s None	c None",
-"  c #0A246A",
-/* pixels */
-"....................",
-"....................",
-"....................",
-"....................",
-"....................",
-"........ ...........",
-".......  ...........",
-"......   ...........",
-".....            ...",
-"....             ...",
-"...              ...",
-"....             ...",
-".....            ...",
-"......   ...........",
-".......  ...........",
-"........ ...........",
-"....................",
-"....................",
-"....................",
-"...................."
-};
-EOT
+  return arrow_left_xpm( "#0A246A");
+
 } # arrow_left_blue_xpm }}}
 
 sub arrow_right_blue_xpm { # {{{
@@ -1000,215 +1001,283 @@ Returns a symbol for a blue right arrow.
 
 =cut
 
-  return <<'EOT';
-/* XPM */
-static char *arrow_right_blue[] = {
-/* columns rows colors chars-per-pixel */
-"20 20 2 1",
-".	s None	c None",
-"  c #0A246A",
-/* pixels */
-"....................",
-"....................",
-"....................",
-"....................",
-"....................",
-"........... ........",
-"...........  .......",
-"...........   ......",
-"...            .....",
-"...             ....",
-"...              ...",
-"...             ....",
-"...            .....",
-"...........   ......",
-"...........  .......",
-"........... ........",
-"....................",
-"....................",
-"....................",
-"...................."
-};
-EOT
+  return arrow_right_xpm( "#0A246A");
+
 } # arrow_right_blue_xpm }}}
 
-sub arrow_first_xpm { # {{{
+sub arrow_left_xpm { # {{{
 
-=head2 arrow_first_xpm()
+=head2 arrow_left_xpm( $color )
 
-Returns a symbol for a  |<  arrow.
+Returns a symbol for a left arrow. The $color parameter is optional.
+Default color is "#ffffff".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift ||"#ffffff";
+  return <<"EOT";
+/* XPM */
+static char *arrow_left_blue[] = {
+/* columns rows colors chars-per-pixel */
+\"20 20 2 1\",
+\".	s None	c None\",
+\"  c $color\",
+/* pixels */
+\"....................\",
+\"....................\",
+\"....................\",
+\"....................\",
+\"....................\",
+\"........ ...........\",
+\".......  ...........\",
+\"......   ...........\",
+\".....            ...\",
+\"....             ...\",
+\"...              ...\",
+\"....             ...\",
+\".....            ...\",
+\"......   ...........\",
+\".......  ...........\",
+\"........ ...........\",
+\"....................\",
+\"....................\",
+\"....................\",
+\"....................\"
+};
+EOT
+} # arrow_left_xpm }}}
+
+sub arrow_right_xpm { # {{{
+
+=head2 arrow_right_xpm( $color )
+
+Returns a symbol for a right arrow. The $color parameter is optional.
+Default color is "#ffffff".
+
+=cut
+
+  my $color = shift ||"#ffffff";
+  return <<"EOT";
+/* XPM */
+static char *arrow_right_blue[] = {
+/* columns rows colors chars-per-pixel */
+\"20 20 2 1\",
+\".	s None	c None\",
+\"  c $color\",
+/* pixels */
+\"....................\",
+\"....................\",
+\"....................\",
+\"....................\",
+\"....................\",
+\"........... ........\",
+\"...........  .......\",
+\"...........   ......\",
+\"...            .....\",
+\"...             ....\",
+\"...              ...\",
+\"...             ....\",
+\"...            .....\",
+\"...........   ......\",
+\"...........  .......\",
+\"........... ........\",
+\"....................\",
+\"....................\",
+\"....................\",
+\"....................\"
+};
+EOT
+} # arrow_right_xpm }}}
+
+sub arrow_first_xpm { # {{{
+
+=head2 arrow_first_xpm( $color )
+
+Returns a symbol for a  |<  arrow. 
+The $color parameter is optional. Default color is "#ffffff".
+
+=cut
+
+  my $color = shift || "#ffffff";
+  return <<"EOT";
 /* XPM */
 static char * arrow_first_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"      .X     .      ",
-"      .X    ..      ",
-"      .X   .X.      ",
-"      .X  .XX.      ",
-"      .X .XXX.      ",
-"      .X.XXXX.      ",
-"      .X .XXX.      ",
-"      .X  .XX.      ",
-"      .X   .X.      ",
-"      .X    ..      ",
-"      .X     .      ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\"      .X     .      \",
+\"      .X    ..      \",
+\"      .X   .X.      \",
+\"      .X  .XX.      \",
+\"      .X .XXX.      \",
+\"      .X.XXXX.      \",
+\"      .X .XXX.      \",
+\"      .X  .XX.      \",
+\"      .X   .X.      \",
+\"      .X    ..      \",
+\"      .X     .      \",
+\"                    \"};
 EOT
 } # arrow_first_xpm }}}
 
 sub arrow_prev_xpm { # {{{
 
-=head2 arrow_prev_xpm()
+=head2 arrow_prev_xpm( $color )
 
 Returns a symbol for a  <  arrow.
+The $color parameter is optional. Default color is "#ffffff".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#ffffff";
+  return <<"EOT";
 /* XPM */
 static char * arrow_prev_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"            .       ",
-"           ..       ",
-"          .X.       ",
-"         .XX.       ",
-"        .XXX.       ",
-"       .XXXX.       ",
-"        .XXX.       ",
-"         .XX.       ",
-"          .X.       ",
-"           ..       ",
-"            .       ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\"            .       \",
+\"           ..       \",
+\"          .X.       \",
+\"         .XX.       \",
+\"        .XXX.       \",
+\"       .XXXX.       \",
+\"        .XXX.       \",
+\"         .XX.       \",
+\"          .X.       \",
+\"           ..       \",
+\"            .       \",
+\"                    \"};
 EOT
 } # arrow_prev_xpm }}}
 
 sub arrow_ppage_xpm { # {{{
 
-=head2 arrow_ppage_xpm()
+=head2 arrow_ppage_xpm( $color )
 
 Returns a symbol for a  <<  arrow.
+The $color parameter is optional. Default color is "#ffffff".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#ffffff";
+  return <<"EOT";
 /* XPM */
 static char * arrow_ppage_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"         .     .    ",
-"        ..    ..    ",
-"       .X.   .X.    ",
-"      .XX.  .XX.    ",
-"     .XXX. .XXX.    ",
-"    .XXXX..XXXX.    ",
-"     .XXX. .XXX.    ",
-"      .XX.  .XX.    ",
-"       .X.   .X.    ",
-"        ..    ..    ",
-"         .     .    ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\"         .     .    \",
+\"        ..    ..    \",
+\"       .X.   .X.    \",
+\"      .XX.  .XX.    \",
+\"     .XXX. .XXX.    \",
+\"    .XXXX..XXXX.    \",
+\"     .XXX. .XXX.    \",
+\"      .XX.  .XX.    \",
+\"       .X.   .X.    \",
+\"        ..    ..    \",
+\"         .     .    \",
+\"                    \"};
 EOT
 } # arrow_ppage_xpm }}}
 
 sub arrow_next_xpm { # {{{
 
-=head2 arrow_next_xpm()
+=head2 arrow_next_xpm( $color )
 
 Returns a symbol for a  >  arrow.
+The $color parameter is optional. Default color is "#ffffff".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#ffffff";
+  return <<"EOT";
 /* XPM */
 static char * arrow_next_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"       .            ",
-"       ..           ",
-"       .X.          ",
-"       .XX.         ",
-"       .XXX.        ",
-"       .XXXX.       ",
-"       .XXX.        ",
-"       .XX.         ",
-"       .X.          ",
-"       ..           ",
-"       .            ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\"       .            \",
+\"       ..           \",
+\"       .X.          \",
+\"       .XX.         \",
+\"       .XXX.        \",
+\"       .XXXX.       \",
+\"       .XXX.        \",
+\"       .XX.         \",
+\"       .X.          \",
+\"       ..           \",
+\"       .            \",
+\"                    \"};
 EOT
 } # arrow_next_xpm }}}
 
 sub arrow_npage_xpm { # {{{
 
-=head2 arrow_npage_xpm()
+=head2 arrow_npage_xpm( $color )
 
 Returns a symbol for a  >>  arrow.
+The $color parameter is optional. Default color is "#ffffff".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#ffffff";
+  return <<"EOT";
 /* XPM */
 static char * arrow_npage_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"    .     .         ",
-"    ..    ..        ",
-"    .X.   .X.       ",
-"    .XX.  .XX.      ",
-"    .XXX. .XXX.     ",
-"    .XXXX..XXXX.    ",
-"    .XXX. .XXX.     ",
-"    .XX.  .XX.      ",
-"    .X.   .X.       ",
-"    ..    ..        ",
-"    .     .         ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\"    .     .         \",
+\"    ..    ..        \",
+\"    .X.   .X.       \",
+\"    .XX.  .XX.      \",
+\"    .XXX. .XXX.     \",
+\"    .XXXX..XXXX.    \",
+\"    .XXX. .XXX.     \",
+\"    .XX.  .XX.      \",
+\"    .X.   .X.       \",
+\"    ..    ..        \",
+\"    .     .         \",
+\"                    \"};
 EOT
 } # arrow_npage_xpm }}}
 
 sub arrow_last_xpm { # {{{
 
-=head2 arrow_last_xpm()
+=head2 arrow_last_xpm( $color )
 
 Returns a symbol for a  >|  arrow.
+The $color parameter is optional. Default color is "#ffffff".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#ffffff";
+  return <<"EOT";
 /* XPM */
 static char * arrow_last_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"      .     X.      ",
-"      ..    X.      ",
-"      .X.   X.      ",
-"      .XX.  X.      ",
-"      .XXX. X.      ",
-"      .XXXX.X.      ",
-"      .XXX. X.      ",
-"      .XX.  X.      ",
-"      .X.   X.      ",
-"      ..    X.      ",
-"      .     X.      ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"X	c $color\",
+\"      .     X.      \",
+\"      ..    X.      \",
+\"      .X.   X.      \",
+\"      .XX.  X.      \",
+\"      .XXX. X.      \",
+\"      .XXXX.X.      \",
+\"      .XXX. X.      \",
+\"      .XX.  X.      \",
+\"      .X.   X.      \",
+\"      ..    X.      \",
+\"      .     X.      \",
+\"                    \"};
 EOT
 } # arrow_last_xpm }}}
 
@@ -1375,42 +1444,43 @@ EOT
 
 sub cross_xpm { # {{{
 
-=head2 cross_xpm()
+=head2 cross_xpm( $color )
 
-Returns a symbol for a  red x-shaped cross.
+Returns a symbol for a x-shaped cross. The $color parameter is optional.
+Default color is "red".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || 'red';
+  return <<"EOT";
 /* XPM */
 static char *cross[] = {
 /* columns rows colors chars-per-pixel */
-"16 20 4 1",
-"  c black",
-". c red",
-"X c #C6C6C6",
-"o c None",
+\"16 20 3 1\",
+\"  c black\",
+\". c $color\",
+\"o c None\",
 /* pixels */
-"oooooooooooooooo",
-"oooooooooooooooo",
-"oooooooooooooooo",
-"oooooooooooooooo",
-"oooooooooooo ooo",
-"oo  ooooooo . oo",
-"o .. ooooo ... o",
-"o ... ooo .... o",
-"oo ... o ...  oo",
-"ooo  .. ... oooo",
-"ooooo ...  ooooo",
-"oooo .. .. ooooo",
-"ooo .. o .. oooo",
-"oo .. ooo .. ooo",
-"o ... ooo ... oo",
-"o .. ooooo .. oo",
-"o .. oooooo  ooo",
-"oo  oooooooooooo",
-"oooooooooooooooo",
-"oooooooooooooooo"
+\"oooooooooooooooo\",
+\"oooooooooooooooo\",
+\"oooooooooooooooo\",
+\"oooooooooooooooo\",
+\"oooooooooooo ooo\",
+\"oo  ooooooo . oo\",
+\"o .. ooooo ... o\",
+\"o ... ooo .... o\",
+\"oo ... o ...  oo\",
+\"ooo  .. ... oooo\",
+\"ooooo ...  ooooo\",
+\"oooo .. .. ooooo\",
+\"ooo .. o .. oooo\",
+\"oo .. ooo .. ooo\",
+\"o ... ooo ... oo\",
+\"o .. ooooo .. oo\",
+\"o .. oooooo  ooo\",
+\"oo  oooooooooooo\",
+\"oooooooooooooooo\",
+\"oooooooooooooooo\"
 };
 EOT
 } # cross_xpm }}}
@@ -2473,115 +2543,124 @@ EOT
 
 sub rotate_left_xpm { # {{{
 
-=head2 rotate_left_xpm()
+=head2 rotate_left_xpm( $color )
 
-Returns a symbol for a "rotate left" arrow
+Returns a symbol for a "rotate left" arrow.
+The $color parameter is optional.
+Default color is "#FCFCFC".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#FCFCFC";
+  return <<"EOT";
 /* XPM */
 static char *rotate-left[] = {
 /* columns rows colors chars-per-pixel */
-"22 20 4 2",
-"   c #040204",
-"X  c none",
-"o  c #FCFEFC",
-".  c #848284",
+\"22 20 4 2\",
+\"   c #040204\",
+\"X  c none\",
+\"o  c $color\",
+\".  c #848284\",
 /* pixels */
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X     X X           X X X X X X X X X ",
-"X X X X   o     o o o o o     X X X X X X X ",
-"X X X X   o o o o o o o o o o   X X X X X X ",
-"X X X X   o o o o         o o   . X X X X X ",
-"X X X X   o o o o   . . .   o o   X X X X X ",
-"X X X X   o o o o o   X X   o o   . X X X X ",
-"X X X X               . X   o o   . X X X X ",
-"X X X X X .   . . . . . X   o o   . X X X X ",
-"X X X X X   o   X X X X X   o o   . X X X X ",
-"X X X X X   o o           o o   . . X X X X ",
-"X X X X X X   o o o o o o o o   . X X X X X ",
-"X X X X X X X   o o o o o     . . X X X X X ",
-"X X X X X X X X           . . . X X X X X X ",
-"X X X X X X X X X . . . . . X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X "
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X     X X           X X X X X X X X X \",
+\"X X X X   o     o o o o o     X X X X X X X \",
+\"X X X X   o o o o o o o o o o   X X X X X X \",
+\"X X X X   o o o o         o o   . X X X X X \",
+\"X X X X   o o o o   . . .   o o   X X X X X \",
+\"X X X X   o o o o o   X X   o o   . X X X X \",
+\"X X X X               . X   o o   . X X X X \",
+\"X X X X X .   . . . . . X   o o   . X X X X \",
+\"X X X X X   o   X X X X X   o o   . X X X X \",
+\"X X X X X   o o           o o   . . X X X X \",
+\"X X X X X X   o o o o o o o o   . X X X X X \",
+\"X X X X X X X   o o o o o     . . X X X X X \",
+\"X X X X X X X X           . . . X X X X X X \",
+\"X X X X X X X X X . . . . . X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \"
 };
 EOT
 } # rotate_left_xpm }}}
 
 sub rotate_right_xpm { # {{{
 
-=head2 rotate_right_xpm()
+=head2 rotate_right_xpm( $color )
 
-Returns a symbol for a "rotate right" arrow
+Returns a symbol for a "rotate right" arrow.
+The $color parameter is optional.
+Default color is "#FCFCFC".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#FCFCFC";
+  return <<"EOT";
 /* XPM */
 static char *rotate-right[] = {
 /* columns rows colors chars-per-pixel */
-"22 20 4 2",
-"   c #040204",
-"X  c none",
-"o  c #FCFEFC",
-".  c #848284",
+\"22 20 4 2\",
+\"   c #040204\",
+\"X  c none\",
+\"o  c $color\",
+\".  c #848284\",
 /* pixels */
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X           X X     X X X X X ",
-"X X X X X X     o o o o o     o   . X X X X ",
-"X X X X X   o o o o o o o o o o   . X X X X ",
-"X X X X X   o o         o o o o   . X X X X ",
-"X X X X   o o   . . .   o o o o   . X X X X ",
-"X X X X   o o   . X   o o o o o   . X X X X ",
-"X X X X   o o   . X               . X X X X ",
-"X X X X   o o   . X X . . .   . . . X X X X ",
-"X X X X   o o   . X X X X   o   X X X X X X ",
-"X X X X X   o o           o o   . X X X X X ",
-"X X X X X   o o o o o o o o   . . X X X X X ",
-"X X X X X X     o o o o o   . . X X X X X X ",
-"X X X X X X X X           . . X X X X X X X ",
-"X X X X X X X X X . . . . . X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X ",
-"X X X X X X X X X X X X X X X X X X X X X X "
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X           X X     X X X X X \",
+\"X X X X X X     o o o o o     o   . X X X X \",
+\"X X X X X   o o o o o o o o o o   . X X X X \",
+\"X X X X X   o o         o o o o   . X X X X \",
+\"X X X X   o o   . . .   o o o o   . X X X X \",
+\"X X X X   o o   . X   o o o o o   . X X X X \",
+\"X X X X   o o   . X               . X X X X \",
+\"X X X X   o o   . X X . . .   . . . X X X X \",
+\"X X X X   o o   . X X X X   o   X X X X X X \",
+\"X X X X X   o o           o o   . X X X X X \",
+\"X X X X X   o o o o o o o o   . . X X X X X \",
+\"X X X X X X     o o o o o   . . X X X X X X \",
+\"X X X X X X X X           . . X X X X X X X \",
+\"X X X X X X X X X . . . . . X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \",
+\"X X X X X X X X X X X X X X X X X X X X X X \"
 };
 EOT
 } # rotate_right_xpm }}}
 
 sub exit_xpm { #{{{
 
-=head2 exit_xpm()
+=head2 exit_xpm( $color )
 
 Returns a symbol for an "Exit" button.
+The $color parameter for the text is optional.
+Default color is "#000000".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "#000000";
+  return <<"EOT";
 /* XPM */
 static char * exit_xpm[] = {
-"20 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"X	c white",
-"                    ",
-" . .. .   . . ..... ",
-" .    .   . .   .   ",
-" .     . .  .   .   ",
-" .     . .  .   .   ",
-" . .    .   .   .   ",
-" .      .   .   .   ",
-" .     . .  .   .   ",
-" .     . .  .   .   ",
-" .    .   . .   .   ",
-" . .. .   . .   .   ",
-"                    "};
+\"20 12 3 1\",
+\" 	s None	c None\",
+\".	c $color\",
+\"X	c white\",
+\"                    \",
+\" . .. .   . . ..... \",
+\" .    .   . .   .   \",
+\" .     . .  .   .   \",
+\" .     . .  .   .   \",
+\" . .    .   .   .   \",
+\" .      .   .   .   \",
+\" .     . .  .   .   \",
+\" .     . .  .   .   \",
+\" .    .   . .   .   \",
+\" . .. .   . .   .   \",
+\"                    \"};
 EOT
 } # exit_xpm }}}
 
@@ -3417,93 +3496,103 @@ EOT
 
 sub box_nonsel_xpm { # {{{
 
-=head2 box_nonsel_xpm()
+=head2 box_nonsel_xpm( $color )
 
-Returns a symbol for a not selected checkbox
+Returns a symbol for a not selected checkbox.
+The $color parameter is optional.
+Default color is "#FFFFFF".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || '#FFFFFF';
+  return <<"EOT";
 /* XPM */
 static char * file_xpm[] = {
-"14 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"x	c white",
-"..............",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".............."};
+\"14 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"x	c $color\",
+\"..............\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\"..............\"};
 EOT
 } # box_nonsel_xpm }}}
 
 sub box_yellow_xpm { # {{{
 
-=head2 box_yellow_xpm()
+=head2 box_yellow_xpm( $color )
 
 Returns a symbol for a not selected yellow checkbox
+The $color parameter is optional.
+Default color is "yellow".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "yellow";
+  return <<"EOT";
 /* XPM */
 static char * file_xpm[] = {
-"14 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"x	c yellow",
-"..............",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".xxxxxxxxxxxx.",
-".............."};
+\"14 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"x	c $color\",
+\"..............\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\".xxxxxxxxxxxx.\",
+\"..............\"};
 EOT
 } # box_yellow_xpm }}}
 
 sub box_sel_xpm { # {{{
 
-=head2 box_sel_xpm()
+=head2 box_sel_xpm( $color )
 
 Returns a symbol for a selected checkbox
+The $color parameter is optional.
+Default color is "yellow".
 
 =cut
 
-  return <<'EOT';
+  my $color = shift || "yellow";
+  return <<"EOT";
 /* XPM */
 static char * file_xpm[] = {
-"14 12 3 1",
-" 	s None	c None",
-".	c #000000000000",
-"x	c yellow",
-"..............",
-".xxxxxxxxxxxx.",
-".x.xxxxxxx.xx.",
-".xx.xxxxx.xxx.",
-".xxx.xxx.xxxx.",
-".xxxx.x.xxxxx.",
-".xxxxx.xxxxxx.",
-".xxxx.x.xxxxx.",
-".xxx.xxx.xxxx.",
-".xx.xxxxx.xxx.",
-".x.xxxxxxx.xx.",
-".............."};
+\"14 12 3 1\",
+\" 	s None	c None\",
+\".	c #000000000000\",
+\"x	c $color\",
+\"..............\",
+\".xxxxxxxxxxxx.\",
+\".x.xxxxxxx.xx.\",
+\".xx.xxxxx.xxx.\",
+\".xxx.xxx.xxxx.\",
+\".xxxx.x.xxxxx.\",
+\".xxxxx.xxxxxx.\",
+\".xxxx.x.xxxxx.\",
+\".xxx.xxx.xxxx.\",
+\".xx.xxxxx.xxx.\",
+\".x.xxxxxxx.xx.\",
+\"..............\"};
 EOT
 } # box_sel_xpm }}}
+
 1;
 
 __END__

@@ -1,6 +1,12 @@
 Revision history for Perl extension Tk::XPMs.
 
-1.10  Mon Dec  24 09:26:13 2008
+1.11  Fri Nov  28 12:14:07 2008
+  - arrow_left_xpm 
+  - arrow_right_xpm
+  - most all arrows and some other xpms accept $color parameter
+  - test suite aborts when MainWindow->new is undefined. 
+
+1.10  Mon Nov  24 09:26:13 2008
   - box_nonsel_xpm
   - box_yellow_xpm
   - box_sel_xpm
